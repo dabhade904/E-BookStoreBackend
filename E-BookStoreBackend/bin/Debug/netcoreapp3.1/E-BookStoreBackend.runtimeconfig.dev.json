@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\kamlesh\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\kamlesh\\.nuget\\packages"
+    ]
+  }
+}

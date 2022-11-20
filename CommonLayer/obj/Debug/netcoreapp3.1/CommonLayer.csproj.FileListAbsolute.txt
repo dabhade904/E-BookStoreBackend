@@ -1,0 +1,10 @@
+C:\Users\kamlesh\Desktop\E-BookProject\CommonLayer\bin\Debug\netcoreapp3.1\CommonLayer.deps.json
+C:\Users\kamlesh\Desktop\E-BookProject\CommonLayer\bin\Debug\netcoreapp3.1\CommonLayer.dll
+C:\Users\kamlesh\Desktop\E-BookProject\CommonLayer\bin\Debug\netcoreapp3.1\CommonLayer.pdb
+C:\Users\kamlesh\Desktop\E-BookProject\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.csproj.AssemblyReference.cache
+C:\Users\kamlesh\Desktop\E-BookProject\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kamlesh\Desktop\E-BookProject\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.AssemblyInfoInputs.cache
+C:\Users\kamlesh\Desktop\E-BookProject\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.AssemblyInfo.cs
+C:\Users\kamlesh\Desktop\E-BookProject\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.csproj.CoreCompileInputs.cache
+C:\Users\kamlesh\Desktop\E-BookProject\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.dll
+C:\Users\kamlesh\Desktop\E-BookProject\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.pdb

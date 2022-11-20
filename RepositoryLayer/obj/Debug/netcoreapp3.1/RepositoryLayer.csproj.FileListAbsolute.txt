@@ -1,0 +1,13 @@
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\bin\Debug\netcoreapp3.1\RepositoryLayer.deps.json
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\bin\Debug\netcoreapp3.1\RepositoryLayer.dll
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\bin\Debug\netcoreapp3.1\RepositoryLayer.pdb
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\bin\Debug\netcoreapp3.1\CommonLayer.dll
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\bin\Debug\netcoreapp3.1\CommonLayer.pdb
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.csproj.AssemblyReference.cache
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.AssemblyInfoInputs.cache
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.AssemblyInfo.cs
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.csproj.CoreCompileInputs.cache
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.csproj.CopyComplete
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.dll
+C:\Users\kamlesh\Desktop\E-BookProject\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.pdb
