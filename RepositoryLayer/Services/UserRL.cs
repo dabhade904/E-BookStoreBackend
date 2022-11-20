@@ -12,7 +12,7 @@ using System.Text;
 
 namespace RepositoryLayer.Services
 {
-    public class UserRL :IUserRL
+    public class UserRL : IUserRL
     {
         private SqlConnection sqlConnection;
         private IConfiguration Configuration { get; }
@@ -120,6 +120,40 @@ namespace RepositoryLayer.Services
             {
 
                 throw ex.InnerException;
+            }
+        }
+        public string ForgetPassword(string Email)
+        {
+            this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
+            using (sqlConnection)
+            {
+                try
+                {
+                    sqlConnection.Open();
+                    string query = "SELECT EmailId FROM Users WHERE EmailId = '" + Email + "'";
+                    SqlCommand cmd = new SqlCommand(query, sqlConnection);
+                    var email = cmd.ExecuteScalar();
+                    string query1 = "SELECT ID FROM Users WHERE EmailId = '" + Email + "'";
+                    SqlCommand sqlCommand = new SqlCommand(query1, sqlConnection);
+                    var id = sqlCommand.ExecuteScalar();
+                    if (email != null)
+                    {
+                        var token = GenerateSecurityToken(email.ToString(), id.ToString());
+                        MSMQModel msmqModel = new MSMQModel();
+                        msmqModel.sendData2Queue(token);
+                        return token;
+                    }
+                    else
+                        return null;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
             }
         }
     }

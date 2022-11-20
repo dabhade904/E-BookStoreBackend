@@ -79,3 +79,6 @@ C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.
 C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
 C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\MSMQ.Messaging.dll
+C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\System.DirectoryServices.dll
+C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.DirectoryServices.dll

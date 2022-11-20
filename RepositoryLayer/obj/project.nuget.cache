@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6Ny8wQ/MVTbmeGWZmA/mP0dN/Bd90Bb9qyGCGWcqTNj/ymcpIk7g0tQvm0476D5waitzGL4SGD3y5y6MrRYFhw==",
+  "dgSpecHash": "HZnCwd9cVOeS3+QWJmZ0C0LVm6jo8/B5WbMtk4OhnL1loSTlbyTwoVrdhDpK6w9k7rwiU9JAxWWBkG0j1YjQhA==",
   "success": true,
   "projectFilePath": "C:\\Users\\kamlesh\\Desktop\\E-BookProject\\RepositoryLayer\\RepositoryLayer.csproj",
   "expectedPackageFiles": [
@@ -25,6 +25,7 @@
     "C:\\Users\\kamlesh\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\kamlesh\\.nuget\\packages\\msmq.messaging\\1.0.4\\msmq.messaging.1.0.4.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
@@ -52,6 +53,7 @@
     "C:\\Users\\kamlesh\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.0\\system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\system.diagnostics.tools\\4.3.0\\system.diagnostics.tools.4.3.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\system.diagnostics.tracing\\4.3.0\\system.diagnostics.tracing.4.3.0.nupkg.sha512",
+    "C:\\Users\\kamlesh\\.nuget\\packages\\system.directoryservices\\4.7.0\\system.directoryservices.4.7.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\system.formats.asn1\\5.0.0\\system.formats.asn1.5.0.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",
@@ -62,6 +64,7 @@
     "C:\\Users\\kamlesh\\.nuget\\packages\\system.io.compression\\4.3.0\\system.io.compression.4.3.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\system.io.compression.zipfile\\4.3.0\\system.io.compression.zipfile.4.3.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\system.io.filesystem\\4.3.0\\system.io.filesystem.4.3.0.nupkg.sha512",
+    "C:\\Users\\kamlesh\\.nuget\\packages\\system.io.filesystem.accesscontrol\\4.7.0\\system.io.filesystem.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\system.io.filesystem.primitives\\4.3.0\\system.io.filesystem.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\system.linq\\4.3.0\\system.linq.4.3.0.nupkg.sha512",
     "C:\\Users\\kamlesh\\.nuget\\packages\\system.linq.expressions\\4.3.0\\system.linq.expressions.4.3.0.nupkg.sha512",

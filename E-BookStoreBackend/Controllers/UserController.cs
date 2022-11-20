@@ -75,6 +75,34 @@ namespace E_BookStoreBackend.Controllers
                 throw;
             }
         }
+        [HttpPost("ForgetPassword")]
+        public IActionResult ForgetPassword(string emailId)
+        {
+            try
+            {
+                var result = userBL.ForgetPassword(emailId);
+                if (!result.Equals(null))
+                {
+                    return this.Ok(new
+                    {
+                        success = true,
+                        message = "Email Send Successfully",
+                    });
+                }
+                else
+                {
+                    return this.BadRequest(new
+                    {
+                        Success = false,
+                        message = "EMail has not send",
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
 
