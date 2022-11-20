@@ -46,5 +46,35 @@ namespace E_BookStoreBackend.Controllers
                 throw e;
             }
         }
+        [HttpPost("Login")]
+        public IActionResult UserLogin(LoginModel loginModel)
+        {
+            try
+            {
+                var result = userBL.UserLogin(loginModel);
+                if (result == null)
+                {
+                    return this.Unauthorized(new
+                    {
+                        Success = false,
+                        message = "Invalid Email or Password",
+                    });
+                }
+                else
+                {
+                    return this.Ok(new
+                    {
+                        success = true,
+                        message = "Login Successfull",
+                        tokan = result
+                    });
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
+

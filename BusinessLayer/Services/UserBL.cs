@@ -13,12 +13,22 @@ namespace BusinessLayer.Services
         {
             this.iuserRL = iuserRL;
         }
-
         public RegistrationModel UserRegistration(RegistrationModel registrationModel)
         {
             try
             {
                 return iuserRL.UserRegistration(registrationModel);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public string UserLogin(LoginModel loginModel)
+        {
+            try
+            {
+                return iuserRL.UserLogin(loginModel);
             }
             catch (Exception)
             {

@@ -8,5 +8,7 @@ namespace BusinessLayer.Interface
     public interface IUserRL
     {
         public RegistrationModel UserRegistration(RegistrationModel userRegistration);
+        public string UserLogin(LoginModel loginModel);
+
     }
 }
