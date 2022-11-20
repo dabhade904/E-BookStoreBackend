@@ -24,3 +24,8 @@ C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\obj\Debug\netcoreapp3.
 C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\obj\Debug\netcoreapp3.1\E-BookStoreBackend.dll
 C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\obj\Debug\netcoreapp3.1\E-BookStoreBackend.pdb
 C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\obj\Debug\netcoreapp3.1\E-BookStoreBackend.genruntimeconfig.cache
+C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\obj\Debug\netcoreapp3.1\E-BookStoreBackend.MvcApplicationPartsAssemblyInfo.cs
