@@ -126,7 +126,7 @@ namespace RepositoryLayer.Services
             this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
             using (sqlConnection)
             {
-                try
+                try     
                 {
                     sqlConnection.Open();
                     string query = "SELECT AdminEmail FROM AdminData WHERE AdminEmail = '" + Email + "'";
