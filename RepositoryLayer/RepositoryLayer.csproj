@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommonLayer\CommonLayer.csproj" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
+    <PackageReference Include="Wodsoft.Extensions.Configuration.Abstractions" Version="1.1.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\CommonLayer\CommonLayer.csproj" />
   </ItemGroup>
 
 </Project>
