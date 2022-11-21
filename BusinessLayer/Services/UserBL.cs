@@ -13,7 +13,7 @@ namespace BusinessLayer.Services
         {
             this.iuserRL = iuserRL;
         }
-        public RegistrationModel UserRegistration(RegistrationModel registrationModel)
+        public UserRegistrationModel UserRegistration(UserRegistrationModel registrationModel)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace BusinessLayer.Services
                 throw;
             }
         }
-        public string UserLogin(LoginModel loginModel)
+        public string UserLogin(UserLoginModel loginModel)
         {
             try
             {

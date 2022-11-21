@@ -21,7 +21,7 @@ namespace E_BookStoreBackend.Controllers
         }
 
         [HttpPost("Register")]
-        public IActionResult Registration(RegistrationModel registrationModel)
+        public IActionResult Registration(UserRegistrationModel registrationModel)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace E_BookStoreBackend.Controllers
             }
         }
         [HttpPost("Login")]
-        public IActionResult UserLogin(LoginModel loginModel)
+        public IActionResult UserLogin(UserLoginModel loginModel)
         {
             try
             {

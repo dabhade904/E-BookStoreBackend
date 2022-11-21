@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RepositoryLayer.Interface;
 using RepositoryLayer.Services;
 using System;
 using System.Collections.Generic;
@@ -35,16 +36,10 @@ namespace E_BookStoreBackend
             services.AddControllers();
             services.AddTransient<IUserBL, UserBL>();
             services.AddTransient<IUserRL,UserRL>();
+            services.AddTransient<IAdminBL, AdminBL>();
+            services.AddTransient<IAdminRL, AdminRL>();
             services.AddSwaggerGen();
-            /*  services.AddSwaggerGen(c =>
-              {
-                  c.SwaggerDoc("v1", new OpenApiInfo
-                  {
-                      Version = "v1",
-                      Title = "Implement Swagger UI",
-                      Description = "A simple example to Implement Swagger UI",
-                  });
-              });*/
+         
 
             services.AddSwaggerGen(c =>
             {
