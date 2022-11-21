@@ -7,8 +7,8 @@ namespace BusinessLayer.Interface
 {
     public interface IAdminBL
     {
-        //public AdminRegistrationModel AdminRegistration(AdminRegistrationModel adminRegistration);
         public AdminRegistrationModel AdminRegistration(AdminRegistrationModel model);
+        public string AdminLogin(AdminLoginModel model);
 
     }
 }

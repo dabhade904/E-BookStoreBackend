@@ -47,5 +47,34 @@ namespace E_BookStoreBackend.Controllers
                 throw e;
             }
         }
+        [HttpPost("Login")]
+        public IActionResult AdminLogin(AdminLoginModel adminLoginModel)
+        {
+            try
+            {
+                var result = adminBL.AdminLogin(adminLoginModel);
+                if (!result.Equals(null))
+                {
+                    return this.Ok(new
+                    {
+                        success = true,
+                        message = "Admin Login Successfull",
+                        data = result
+                    });
+                }
+                else
+                {
+                    return this.BadRequest(new
+                    {
+                        success = false,
+                        message = "Admin Login UnSuccessfull"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
