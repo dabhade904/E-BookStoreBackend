@@ -34,7 +34,7 @@ namespace RepositoryLayer.Services
                     };
                     cmd.Parameters.AddWithValue("@FullName", registrationModel.FullName);
                     cmd.Parameters.AddWithValue("@EmailId", registrationModel.Email);
-                    cmd.Parameters.AddWithValue("@Password", registrationModel.Password);
+                    cmd.Parameters.AddWithValue("@Password", EncryptPassword(registrationModel.Password));
                     cmd.Parameters.AddWithValue("@MobileNumber", registrationModel.MobileNumber);
                     this.sqlConnection.Open();
                     var result = cmd.ExecuteNonQuery();
@@ -68,9 +68,9 @@ namespace RepositoryLayer.Services
                     SqlCommand command = new SqlCommand("Login_User", sqlConnection);
                     command.CommandType = CommandType.StoredProcedure;
                     sqlConnection.Open();
-
+                  //  var pass = DecryptPassword(loginModel.Password);
                     command.Parameters.AddWithValue("@EmailId", loginModel.Email);
-                    command.Parameters.AddWithValue("@Password", loginModel.Password);
+                    command.Parameters.AddWithValue("@Password",loginModel.Password);
 
                     var result = command.ExecuteScalar();
                     if (result != null)
@@ -169,7 +169,7 @@ namespace RepositoryLayer.Services
                         command.CommandType = CommandType.StoredProcedure;
                         sqlConnection.Open();
                         command.Parameters.AddWithValue("@EmailId", EmailId);
-                        command.Parameters.AddWithValue("@Password", resetPassword);
+                        command.Parameters.AddWithValue("@Password", EncryptPassword(resetPassword));
                         int result = command.ExecuteNonQuery();
                         if (result > 0)
                         {
@@ -191,6 +191,46 @@ namespace RepositoryLayer.Services
                 {
                     sqlConnection.Close();
                 }
+            }
+        }
+        public string EncryptPassword(string password)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(password))
+                {
+                    byte[] storePassword = ASCIIEncoding.ASCII.GetBytes(password);
+                    string encryptPassword = Convert.ToBase64String(storePassword);
+                    return encryptPassword;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public string DecryptPassword(string password)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(password))
+                {
+                    byte[] encryptedPassword = Convert.FromBase64String(password);
+                    string decryptPassword = ASCIIEncoding.ASCII.GetString(encryptedPassword);
+                    return decryptPassword;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }
