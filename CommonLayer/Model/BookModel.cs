@@ -6,6 +6,7 @@ namespace CommonLayer.Model
 {
     public class BookModel
     {
+        public int ID { get; set; }
         public string BookName { get; set; }
         public string Author { get; set; }
         public string BookImage { get; set; }
