@@ -10,6 +10,8 @@ namespace BusinessLayer.Interface
         public AdminRegistrationModel AdminRegistration(AdminRegistrationModel model);
         public string AdminLogin(AdminLoginModel model);
         public string ForgetPassword(string email);
+        public bool AdminResetPassword(string resetPassword, string confirmPassword, string EmailId);
+
 
     }
 }

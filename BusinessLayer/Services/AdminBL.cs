@@ -48,5 +48,16 @@ namespace BusinessLayer.Services
                 throw;
             }
         }
+        public bool AdminResetPassword(string resetPassword, string confirmPassword, string EmailId)
+        {
+            try
+            {
+                return adminRL.AdminResetPassword(resetPassword, confirmPassword, EmailId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

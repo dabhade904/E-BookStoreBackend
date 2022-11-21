@@ -27,17 +27,31 @@ UPDATE Users
 SET Password= @Password where EmailId=@EmailId
 END
 
-create table AdminTable (
+create table AdminData (
     ID int IDENTITY(1,1) PRIMARY KEY (ID),
     AdminName varchar(50),
     AdminEmail varchar(50),
     AdminPassword varchar(100),
     AdminMobileNumber varchar(12));
 go
-CREATE PROCEDURE [dbo].[Admin] @AdminName VARCHAR(100), @AdminEmail VARCHAR(100), @AdminPassword VARCHAR(100), @AdminMobileNumber BIGINT 
+CREATE PROCEDURE [dbo].[SP_Admin] @AdminName VARCHAR(100), @AdminEmail VARCHAR(100), @AdminPassword VARCHAR(100), @AdminMobileNumber BIGINT 
 AS
 BEGIN
-INSERT INTO Admin (AdminName,AdminEmail,AdminPassword,AdminMobileNumber) VALUES (@AdminName, @AdminEmail, @AdminPassword, @AdminMobileNumber)
+INSERT INTO AdminData (AdminName,AdminEmail,AdminPassword,AdminMobileNumber) VALUES (@AdminName, @AdminEmail, @AdminPassword, @AdminMobileNumber)
 END
 
-select * from AdminTable
+select * from AdminData
+
+
+CREATE PROCEDURE [dbo].[Login_Admin] @AdminEmail VARCHAR(100), @AdminPassword VARCHAR (100)
+AS
+BEGIN
+SELECT AdminEmail,AdminPassword FROM AdminData WHERE AdminEmail=@AdminEmail AND AdminPassword=@AdminPassword
+END
+
+CREATE PROCEDURE SP_AdminResetPassword @AdminEmail VARCHAR(100), @AdminPassword VARCHAR (100)
+AS
+BEGIN
+UPDATE AdminData
+SET AdminPassword= @AdminPassword where AdminEmail=@AdminEmail
+END

@@ -12,7 +12,7 @@ using System.Text;
 
 namespace RepositoryLayer.Services
 {
-    public class AdminRL: IAdminRL
+    public class AdminRL : IAdminRL
     {
         private SqlConnection sqlConnection;
         private IConfiguration Configuration { get; }
@@ -70,7 +70,7 @@ namespace RepositoryLayer.Services
                     sqlConnection.Open();
                     //  var pass = DecryptPassword(loginModel.Password);
                     command.Parameters.AddWithValue("@AdminEmail", model.AdminEmail);
-                    command.Parameters.AddWithValue("@AdminPassword",model.AdminPassword);
+                    command.Parameters.AddWithValue("@AdminPassword", model.AdminPassword);
 
                     var result = command.ExecuteScalar();
                     if (result != null)
@@ -144,6 +144,43 @@ namespace RepositoryLayer.Services
                     }
                     else
                         return null;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
+        public bool AdminResetPassword(string resetPassword, string confirmPassword, string EmailId)
+        {
+            this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
+            using (sqlConnection)
+            {
+                try
+                {
+                    if (resetPassword.Equals(confirmPassword))
+                    {
+                        SqlCommand command = new SqlCommand("SP_AdminResetPassword", sqlConnection);
+                        command.CommandType = CommandType.StoredProcedure;
+                        sqlConnection.Open();
+                        command.Parameters.AddWithValue("@AdminEmail", EmailId);
+                        command.Parameters.AddWithValue("@AdminPassword",resetPassword);
+                        int result = command.ExecuteNonQuery();
+                        if (result > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                        return false;
                 }
                 catch (Exception)
                 {
