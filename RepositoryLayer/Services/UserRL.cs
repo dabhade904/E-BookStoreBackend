@@ -156,5 +156,42 @@ namespace RepositoryLayer.Services
                 }
             }
         }
+        public bool ResetPassword(string resetPassword, string confirmPassword, string EmailId)
+        {
+            this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
+            using (sqlConnection)
+            {
+                try
+                {
+                    if (resetPassword.Equals(confirmPassword))
+                    {
+                        SqlCommand command = new SqlCommand("SP_ResetPassword", sqlConnection);
+                        command.CommandType = CommandType.StoredProcedure;
+                        sqlConnection.Open();
+                        command.Parameters.AddWithValue("@EmailId", EmailId);
+                        command.Parameters.AddWithValue("@Password", resetPassword);
+                        int result = command.ExecuteNonQuery();
+                        if (result > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                        return false;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
     }
 }

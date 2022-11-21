@@ -82,3 +82,4 @@ C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.
 C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\MSMQ.Messaging.dll
 C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\System.DirectoryServices.dll
 C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.DirectoryServices.dll
+C:\Users\kamlesh\Desktop\E-BookProject\E-BookStoreBackend\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll

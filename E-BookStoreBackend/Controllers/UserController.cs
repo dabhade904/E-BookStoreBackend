@@ -1,8 +1,11 @@
 ﻿using BusinessLayer.Interface;
 using CommonLayer.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Drawing;
+using System.Security.Claims;
 
 namespace E_BookStoreBackend.Controllers
 {
@@ -99,6 +102,29 @@ namespace E_BookStoreBackend.Controllers
                 }
             }
             catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        [Authorize]
+        [HttpPost("ResetPassword")]
+        public IActionResult ResetPassword(string resetPassword, string confirmPassword)
+        {
+            try
+            {
+                var EmailId = User.FindFirst(ClaimTypes.Email).Value.ToString();
+                var result = userBL.ResetPassword(resetPassword,confirmPassword, EmailId);
+
+                if (result != null)
+                {
+                    return Ok(new { Success = true, Message = " Password reset succcessful" });
+                }
+                else
+                {
+                    return BadRequest(new { Success = false, Message = "Password reset unsuccessful" });
+                }
+            }
+            catch (System.Exception)
             {
                 throw;
             }
