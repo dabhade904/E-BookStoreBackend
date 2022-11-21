@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Interface;
 using CommonLayer.Model;
 using RepositoryLayer.Interface;
+using RepositoryLayer.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,6 +31,17 @@ namespace BusinessLayer.Services
             try
             {
                 return adminRL.AdminLogin(model);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public string ForgetPassword(string email)
+        {
+            try
+            {
+                return adminRL.ForgetPassword(email);
             }
             catch (Exception)
             {

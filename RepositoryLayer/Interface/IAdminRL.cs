@@ -9,6 +9,8 @@ namespace RepositoryLayer.Interface
     {
         public AdminRegistrationModel AdminRegistration(AdminRegistrationModel model);
         public string AdminLogin(AdminLoginModel model);
+        public string ForgetPassword(string email);
+
 
     }
 }
