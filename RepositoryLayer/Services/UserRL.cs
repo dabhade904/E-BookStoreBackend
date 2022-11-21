@@ -22,7 +22,7 @@ namespace RepositoryLayer.Services
             this.Configuration = Configuration;
         }
 
-        public RegistrationModel UserRegistration(RegistrationModel registrationModel)
+        public UserRegistrationModel UserRegistration(UserRegistrationModel registrationModel)
         {
             {
                 try
@@ -58,7 +58,7 @@ namespace RepositoryLayer.Services
                 }
             }
         }
-        public string UserLogin(LoginModel loginModel)
+        public string UserLogin(UserLoginModel loginModel)
         {
             this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
             using (sqlConnection)
