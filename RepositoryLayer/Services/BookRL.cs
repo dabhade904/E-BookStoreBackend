@@ -57,5 +57,40 @@ namespace RepositoryLayer.Services
                 this.sqlConnection.Close();
             }
         }
+        public BookModel GetBookByBookId(int bookId)
+        {
+            try
+            {
+                this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
+                SqlCommand cmd = new SqlCommand("SP_GetBookByBookId", this.sqlConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                //adding parameter to store procedure
+                cmd.Parameters.AddWithValue("@BookId", bookId);
+                this.sqlConnection.Open();
+                BookModel book = new BookModel();
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                book.BookName = reader["BookName"].ToString();
+                book.Author = reader["Author"].ToString();
+                book.Rating = Convert.ToInt32(reader["Rating"]);
+                book.RatingCount = Convert.ToInt32(reader["RatingCount"]);
+                book.ActualPrice = Convert.ToInt32(reader["ActualPrice"]);
+                book.DiscountPrice = Convert.ToInt32(reader["DiscountPrice"]);
+                book.BookDetail = reader["BookDetail"].ToString();
+                book.Quantity = Convert.ToInt32(reader["Quantity"]);
+                book.BookImage = reader["BookImage"].ToString();
+                return book;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                this.sqlConnection.Close();
+            }
+        }
     }
 }
