@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BusinessLayer.Services
 {
-    public class BookBL:IBookBL
+    public class BookBL : IBookBL
     {
         private readonly IBookRL bookRL;
         public BookBL(IBookRL bookRL)
@@ -30,6 +30,17 @@ namespace BusinessLayer.Services
             try
             {
                 return bookRL.GetBookByBookId(bookId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<BookModel> GetAllBooks()
+        {
+            try
+            {
+                return bookRL.GetAllBooks();
             }
             catch (Exception)
             {

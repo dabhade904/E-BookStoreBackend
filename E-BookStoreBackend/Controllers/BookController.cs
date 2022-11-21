@@ -74,5 +74,34 @@ namespace E_BookStoreBackend.Controllers
                 throw e;
             }
         }
+        [HttpGet("GetAllBook")]
+        public IActionResult GetAllBooks()
+        {
+            try
+            {
+                var result = bookBL.GetAllBooks();
+                if (!result.Equals(null))
+                {
+                    return this.Ok(new
+                    {
+                        success = true,
+                        message = "Book Data Fetched",
+                        data = result
+                    });
+                }
+                else
+                {
+                    return this.BadRequest(new
+                    {
+                        success = false,
+                        message = "Something went wrong"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

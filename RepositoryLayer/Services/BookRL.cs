@@ -92,5 +92,53 @@ namespace RepositoryLayer.Services
                 this.sqlConnection.Close();
             }
         }
+        public List<BookModel> GetAllBooks()
+        {
+            try
+            {
+                List<BookModel> book = new List<BookModel>();
+                this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
+                SqlCommand cmd = new SqlCommand("SP_GetAllBook", this.sqlConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                this.sqlConnection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        book.Add(new BookModel
+                        {
+                            ID = Convert.ToInt32(reader["Id"]),
+                            BookName = reader["BookName"].ToString(),
+                            Author = reader["Author"].ToString(),
+                            Rating = Convert.ToInt32(reader["Rating"]),
+                            RatingCount = Convert.ToInt32(reader["RatingCount"]),
+                            DiscountPrice = Convert.ToInt64(reader["DiscountPrice"]),
+                            ActualPrice = Convert.ToInt64(reader["ActualPrice"]),
+                            BookDetail = reader["BookDetail"].ToString(),
+                            Quantity = Convert.ToInt32(reader["Quantity"]),
+                            BookImage = reader["BookImage"].ToString()
+                        });
+                    }
+                    this.sqlConnection.Close();
+                    return book;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                this.sqlConnection.Close();
+            }
+        }
+
     }
 }
