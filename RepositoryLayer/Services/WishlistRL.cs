@@ -5,11 +5,12 @@ using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Text;
 
 namespace RepositoryLayer.Services
 {
-    public class WishlistRL:IWishlistRL
+    public class WishlistRL : IWishlistRL
     {
         private SqlConnection sqlConnection;
         private IConfiguration Configuration { get; }
@@ -66,7 +67,7 @@ namespace RepositoryLayer.Services
                         model.userId = Convert.ToInt32(reader["UserId"]);
                         model.wishListId = Convert.ToInt32(reader["wishListId"]);
                         bookModel.BookName = reader["BookName"].ToString();
-                        bookModel.Author= reader["Author"].ToString();
+                        bookModel.Author = reader["Author"].ToString();
                         bookModel.Rating = Convert.ToInt32(reader["Rating"]);
                         bookModel.RatingCount = Convert.ToInt32(reader["RatingCount"]);
                         bookModel.ActualPrice = Convert.ToInt32(reader["ActualPrice"]);
@@ -74,7 +75,7 @@ namespace RepositoryLayer.Services
                         bookModel.BookDetail = reader["BookDetail"].ToString();
                         bookModel.Quantity = Convert.ToInt32(reader["Quantity"]);
                         bookModel.BookImage = reader["BookImage"].ToString();
-                        model.bookId = Convert.ToInt32(reader["ID"]);
+                        model.bookId = Convert.ToInt32(reader["BookId"]);
                         model.bookModel = bookModel;
                         wishList.Add(model);
                     }
@@ -92,6 +93,38 @@ namespace RepositoryLayer.Services
             finally
             {
                 sqlConnection.Close();
+            }
+        }
+        public string DeleteFromWishList(int wishListId)
+        {
+            this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
+            using (sqlConnection)
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("SP_DeleteWishlist", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@WishListId", wishListId);
+
+                    sqlConnection.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                    if (result != 0)
+                    {
+                        return "Item Removed from WishList Successfully";
+                    }
+                    else
+                    {
+                        return "Failed to Remove item from WishList";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
             }
         }
     }

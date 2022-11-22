@@ -73,5 +73,31 @@ namespace E_BookStoreBackend.Controllers
                 throw eX;
             }
         }
+
+        [Authorize(Roles = Role.User)]
+        [HttpDelete("DeleteWishListBook")]
+        public IActionResult DeleteWishlist(int wishlistId)
+        {
+            try
+            {
+                var result = wishlistBL.DeleteFromWishList(wishlistId);
+                if (result != null)
+                {
+                    return this.Ok(new { success = true, data = result,message="Book deleted for wishlist" });
+
+                }
+                else
+                {
+                    return this.BadRequest();
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }
