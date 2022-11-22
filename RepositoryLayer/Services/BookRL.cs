@@ -173,5 +173,40 @@ namespace RepositoryLayer.Services
                 this.sqlConnection.Close();
             }
         }
+        public bool UpdateBook(int BookId, BookModel updateBook)
+        {
+            try
+            {
+                this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
+                SqlCommand cmd = new SqlCommand("SP_UpdateBook", this.sqlConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                //adding parameter to store procedure
+                cmd.Parameters.AddWithValue("@BookId", BookId);
+                cmd.Parameters.AddWithValue("@BookName", updateBook.BookName);
+                cmd.Parameters.AddWithValue("@Author", updateBook.Author);
+                cmd.Parameters.AddWithValue("@Rating", updateBook.Rating);
+                cmd.Parameters.AddWithValue("@RatingCount", updateBook.RatingCount);
+                cmd.Parameters.AddWithValue("@DiscountPrice", updateBook.DiscountPrice);
+                cmd.Parameters.AddWithValue("@ActualPrice", updateBook.ActualPrice);
+                cmd.Parameters.AddWithValue("@BookDetail", updateBook.BookDetail);
+                cmd.Parameters.AddWithValue("@Quantity", updateBook.Quantity);
+                cmd.Parameters.AddWithValue("@BookImage", updateBook.BookImage);
+
+                sqlConnection.Open();
+                cmd.ExecuteScalar();
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                this.sqlConnection.Close();
+            }
+
+        }
     }
 }

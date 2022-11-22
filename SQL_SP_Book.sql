@@ -50,3 +50,25 @@ begin
 Delete from BookTable where Id=@BookId;
 end
 GO
+
+
+create procedure [dbo].[SP_UpdateBook]
+(
+@BooKId int,
+@BookName varchar(50),
+@Author varchar(50),
+@BookImage varchar(100),
+@BookDetail varchar(12),
+@DiscountPrice int,
+@ActualPrice int,
+@Quantity int,
+@Rating float,
+@RatingCount float
+)
+as
+begin
+update BookTable set BookName =@BookName,Author=@Author,Rating=@Rating,RatingCount=@RatingCount,ActualPrice=@ActualPrice,
+DiscountPrice=@DiscountPrice,BookDetail=@BookDetail,Quantity=@Quantity,BookImage=@BookImage
+where Id=@BooKId;
+end
+GO

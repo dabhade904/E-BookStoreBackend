@@ -130,6 +130,33 @@ namespace E_BookStoreBackend.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
-
+        [Authorize(Roles = Role.Admin)]
+        [HttpPut("UpdateBooK")]
+        public IActionResult UpdateBook(int bookId,BookModel bookModel)
+        {
+            try
+            {
+                if (this.bookBL.UpdateBook(bookId,bookModel))
+                {
+                    return this.Ok(new
+                    {
+                        Success = true,
+                        message = "Book Update Sucessfully"
+                    });
+                }
+                else
+                {
+                    return this.BadRequest(new
+                    {
+                        Success = false,
+                        message = "Enter Valid BookId"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
     }
 }
