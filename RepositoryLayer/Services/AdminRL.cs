@@ -107,7 +107,8 @@ namespace RepositoryLayer.Services
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                       new Claim(ClaimTypes.Email, email),
+                        new Claim(ClaimTypes.Role, "Admin"),
+                        new Claim(ClaimTypes.Email, email),
                         new Claim("ID", userID.ToString())
                     }),
                     Expires = DateTime.UtcNow.AddMinutes(15),
@@ -126,7 +127,7 @@ namespace RepositoryLayer.Services
             this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
             using (sqlConnection)
             {
-                try     
+                try
                 {
                     sqlConnection.Open();
                     string query = "SELECT AdminEmail FROM AdminData WHERE AdminEmail = '" + Email + "'";
@@ -168,7 +169,7 @@ namespace RepositoryLayer.Services
                         command.CommandType = CommandType.StoredProcedure;
                         sqlConnection.Open();
                         command.Parameters.AddWithValue("@AdminEmail", EmailId);
-                        command.Parameters.AddWithValue("@AdminPassword",resetPassword);
+                        command.Parameters.AddWithValue("@AdminPassword", resetPassword);
                         int result = command.ExecuteNonQuery();
                         if (result > 0)
                         {
