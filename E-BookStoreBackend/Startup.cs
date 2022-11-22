@@ -40,9 +40,10 @@ namespace E_BookStoreBackend
             services.AddTransient<IAdminRL, AdminRL>();
             services.AddTransient<IBookBL, BookBL>();
             services.AddTransient<IBookRL, BookRL>();
+            services.AddTransient<IWishlistBL, WishlistBL>();
+            services.AddTransient<IWishlistRL, WishlistRL>();
             services.AddSwaggerGen();
          
-
             services.AddSwaggerGen(c =>
             {
                 var jwtSecurityScheme = new OpenApiSecurityScheme

@@ -107,9 +107,7 @@ namespace E_BookStoreBackend.Controllers
         }
         [Authorize(Roles = Role.Admin)]
         [HttpDelete("DeletebyBooKId")]
-       
-       // [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult DeletBook(int bookId)
+       public IActionResult DeletBook(int bookId)
         {
             try
             {
