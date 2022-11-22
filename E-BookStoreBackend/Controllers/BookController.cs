@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interface;
 using CommonLayer.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,6 +17,7 @@ namespace E_BookStoreBackend.Controllers
         {
             this.bookBL = bookBL;
         }
+        [Authorize(Roles = Role.Admin)]
         [HttpPost("CreateBook")]
         public IActionResult Registration(BookModel bookModel)
         {
@@ -101,6 +103,59 @@ namespace E_BookStoreBackend.Controllers
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+        [Authorize(Roles = Role.Admin)]
+        [HttpDelete("DeletebyBooKId")]
+       
+       // [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult DeletBook(int bookId)
+        {
+            try
+            {
+                if (this.bookBL.DeleteBook(bookId))
+                {
+                    return this.Ok(new {
+                        Success = true,
+                        message = "Book Deleted Sucessfully"
+                    });
+                }
+                else { return this.BadRequest(new { 
+                    Success = false,
+                    message = "Enter Valid BookId"
+                }); }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
+        [Authorize(Roles = Role.Admin)]
+        [HttpPut("UpdateBooK")]
+        public IActionResult UpdateBook(int bookId,BookModel bookModel)
+        {
+            try
+            {
+                if (this.bookBL.UpdateBook(bookId,bookModel))
+                {
+                    return this.Ok(new
+                    {
+                        Success = true,
+                        message = "Book Update Sucessfully"
+                    });
+                }
+                else
+                {
+                    return this.BadRequest(new
+                    {
+                        Success = false,
+                        message = "Enter Valid BookId"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
     }
