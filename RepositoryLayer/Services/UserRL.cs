@@ -107,8 +107,10 @@ namespace RepositoryLayer.Services
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                       new Claim(ClaimTypes.Email, email),
-                        new Claim("ID", userID.ToString())
+                        new Claim(ClaimTypes.Role, "User"),
+                        new Claim(ClaimTypes.Email, email),
+                       // new Claim("ID", userID.ToString()),
+                        new Claim("userID",userID.ToString())
                     }),
                     Expires = DateTime.UtcNow.AddMinutes(15),
                     SigningCredentials = new SigningCredentials(loginTokenKey, SecurityAlgorithms.HmacSha256Signature)

@@ -42,5 +42,57 @@ namespace RepositoryLayer.Services
                 this.sqlConnection.Close();
             }
         }
+
+        public List<WishlistModel> GetAllBooksinWishList(int userId)
+        {
+            try
+            {
+                this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
+                SqlCommand cmd = new SqlCommand("SP_GetAllWishListBooks", this.sqlConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                List<WishlistModel> wishList = new List<WishlistModel>();
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                sqlConnection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        WishlistModel model = new WishlistModel();
+                        BookModel bookModel = new BookModel();
+                        model.userId = Convert.ToInt32(reader["UserId"]);
+                        model.wishListId = Convert.ToInt32(reader["wishListId"]);
+                        bookModel.BookName = reader["BookName"].ToString();
+                        bookModel.Author= reader["Author"].ToString();
+                        bookModel.Rating = Convert.ToInt32(reader["Rating"]);
+                        bookModel.RatingCount = Convert.ToInt32(reader["RatingCount"]);
+                        bookModel.ActualPrice = Convert.ToInt32(reader["ActualPrice"]);
+                        bookModel.DiscountPrice = Convert.ToInt32(reader["DiscountPrice"]);
+                        bookModel.BookDetail = reader["BookDetail"].ToString();
+                        bookModel.Quantity = Convert.ToInt32(reader["Quantity"]);
+                        bookModel.BookImage = reader["BookImage"].ToString();
+                        model.bookId = Convert.ToInt32(reader["ID"]);
+                        model.bookModel = bookModel;
+                        wishList.Add(model);
+                    }
+                    return wishList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
     }
 }

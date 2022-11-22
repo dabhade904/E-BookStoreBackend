@@ -26,6 +26,16 @@ namespace BusinessLayer.Services
                 throw;
             }
         }
-
+        public List<WishlistModel> GetAllBooksinWishList(int userId)
+        {
+            try
+            {
+                return wishlistRL.GetAllBooksinWishList(userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

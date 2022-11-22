@@ -7,6 +7,8 @@ namespace BusinessLayer.Interface
 {
     public interface IWishlistBL
     {
-       public string AddBookinWishList(WishlistModel wishListModel, int userId);
+        public string AddBookinWishList(WishlistModel wishListModel, int userId);
+        public List<WishlistModel> GetAllBooksinWishList(int userId);
+
     }
 }
