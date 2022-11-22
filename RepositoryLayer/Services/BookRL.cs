@@ -5,6 +5,7 @@ using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Net;
 using System.Text;
 
 namespace RepositoryLayer.Services
@@ -139,6 +140,38 @@ namespace RepositoryLayer.Services
                 this.sqlConnection.Close();
             }
         }
+        public bool DeleteBook(int bookId)
+        {
+            try
+            {
+                this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
+                SqlCommand cmd = new SqlCommand("SP_DeleteBook", this.sqlConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@BookId", bookId);
+                this.sqlConnection.Open();
+                var result = cmd.ExecuteNonQuery();
+                this.sqlConnection.Close();
+                if (result != 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
 
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                this.sqlConnection.Close();
+            }
+        }
     }
 }

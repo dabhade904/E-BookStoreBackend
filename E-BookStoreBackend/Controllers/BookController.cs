@@ -105,5 +105,31 @@ namespace E_BookStoreBackend.Controllers
                 throw e;
             }
         }
+        [Authorize(Roles = Role.Admin)]
+        [HttpDelete("DeletebyBooKId")]
+       
+       // [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult DeletBook(int bookId)
+        {
+            try
+            {
+                if (this.bookBL.DeleteBook(bookId))
+                {
+                    return this.Ok(new {
+                        Success = true,
+                        message = "Book Deleted Sucessfully"
+                    });
+                }
+                else { return this.BadRequest(new { 
+                    Success = false,
+                    message = "Enter Valid BookId"
+                }); }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
+
     }
 }

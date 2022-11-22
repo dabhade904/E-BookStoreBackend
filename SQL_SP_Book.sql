@@ -20,17 +20,33 @@ AS
 BEGIN
 INSERT INTO BookTable( BookName,Author,BookImage,BookDetail,DiscountPrice,ActualPrice,Quantity,Rating,RatingCount) VALUES (@BookName, @Author, @BookImage, @BookDetail,@DiscountPrice,@ActualPrice,@Quantity,@Rating,@RatingCount)
 END
-
+select * from Users
 select * from BookTable
 drop table BookTable
 
 
 create procedure [dbo].[SP_GetBookByBookId]
 (
-@BooKId int
+@BookId int
 )
 as
 begin
-select * from BookTable where Id=@BooKId
+select * from BookTable where ID=@BookId
+end
+GO
+
+create procedure [dbo].[SP_GetAllBook]
+as
+begin
+select * from BookTable
+end
+
+create procedure [dbo].[SP_DeleteBook]
+(
+@BookId int
+)
+as
+begin
+Delete from BookTable where Id=@BookId;
 end
 GO
