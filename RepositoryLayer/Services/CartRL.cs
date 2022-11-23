@@ -94,5 +94,57 @@ namespace RepositoryLayer.Services
                 sqlConnection.Close();
             }
         }
+        public List<CartModel> GetAllBooksinCart(int userId)
+        {
+            try
+            {
+                this.sqlConnection = new SqlConnection(this.configuration["ConnectionStrings:EBookStore"]);
+                SqlCommand cmd = new SqlCommand("SP_GetCartBooks", this.sqlConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                List<CartModel> cart = new List<CartModel>();
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                sqlConnection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        CartModel model = new CartModel();
+                        BookModel bookModel = new BookModel();
+                        model.CartId = Convert.ToInt32(reader["CartId"]);
+                        bookModel.BookName = reader["BookName"].ToString();
+                        bookModel.Author = reader["Author"].ToString();
+                        bookModel.Rating = Convert.ToInt32(reader["Rating"]);
+                        bookModel.RatingCount = Convert.ToInt32(reader["RatingCount"]);
+                        bookModel.ActualPrice = Convert.ToInt32(reader["ActualPrice"]);
+                        bookModel.DiscountPrice = Convert.ToInt32(reader["DiscountPrice"]);
+                        bookModel.BookDetail = reader["BookDetail"].ToString();
+                        bookModel.Quantity = Convert.ToInt32(reader["Quantity"]);
+                        bookModel.BookImage = reader["BookImage"].ToString();
+                        model.BookId = Convert.ToInt32(reader["BookId"]);
+                        model.BooksQty = Convert.ToInt32(reader["BooksQty"]);
+                        model.bookModel = bookModel;
+                        cart.Add(model);
+                    }
+                    return cart;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+        }
     }
 }

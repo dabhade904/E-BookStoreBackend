@@ -106,5 +106,25 @@ namespace E_BookStoreBackend.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
+        [Authorize(Roles = Role.User)]
+        [HttpGet("GetAllBooksInCart")]
+        public IActionResult GetAllBookInCart()
+        {
+            try
+            {
+                int userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                var result = this.cartBL.GetAllBooksinCart(userId);
+
+                if (result != null)
+                {
+                    return this.Ok(new { Success = true, message = "All Books Displayed in the cart Successfully", Response = result });
+                }
+                else { return this.BadRequest(new { Success = false, message = "Enter Valid UserId" }); }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
     }
 }
