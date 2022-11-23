@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BusinessLayer.Services
 {
-    public class CartBL:ICartBL
+    public class CartBL : ICartBL
     {
         public readonly ICartRL cartRL;
         public CartBL(ICartRL cartRL)
@@ -18,7 +18,18 @@ namespace BusinessLayer.Services
         {
             try
             {
-                return cartRL.AddBookToCart(cartModel, userId); 
+                return cartRL.AddBookToCart(cartModel, userId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public string DeleteCart(int cartId)
+        {
+            try
+            {
+                return cartRL.DeleteCart(cartId);
             }
             catch (Exception e)
             {

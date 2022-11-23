@@ -45,6 +45,30 @@ namespace RepositoryLayer.Services
                 this.sqlConnection.Close();
             }
         }
+        public string DeleteCart(int cartId)
+        {
+            try
+            {
+                this.sqlConnection = new SqlConnection(this.configuration["ConnectionStrings:EBookStore"]);
+                SqlCommand cmd = new SqlCommand("SP_DeleteCart", this.sqlConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                cmd.Parameters.AddWithValue("@CartId", cartId);
+                sqlConnection.Open();
+                cmd.ExecuteScalar();
+                return "Book Deleted in Cart Successfully";
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
 
     }
 }

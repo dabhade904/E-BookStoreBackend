@@ -19,8 +19,8 @@ namespace E_BookStoreBackend.Controllers
         }
 
         [Authorize(Roles = Role.User)]
-        [HttpPost("AddBookToCart")]
-      //  [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("AddToCart")]
+        //  [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult AddToCart(CartModel cartModel)
         {
             try
@@ -29,13 +29,15 @@ namespace E_BookStoreBackend.Controllers
                 var userData = this.cartBL.AddBookToCart(cartModel, userId);
                 if (userData != null)
                 {
-                    return this.Ok(new { 
+                    return this.Ok(new
+                    {
                         Success = true,
                         message = "Book Added to cart Sucessfully",
-                        Response = userData 
+                        Response = userData
                     });
                 }
-                return this.Ok(new { 
+                return this.Ok(new
+                {
                     Success = true,
                     message = "Book Already Exists"
                 });
@@ -45,6 +47,34 @@ namespace E_BookStoreBackend.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
-
+        [Authorize(Roles = Role.User)]
+        [HttpDelete("DeleteCart")]
+        public IActionResult DeletCart(int cartId)
+        {
+            try
+            {
+                var data = this.cartBL.DeleteCart(cartId);
+                if (data != null)
+                {
+                    return this.Ok(new
+                    {
+                        Success = true,
+                        message = "Book in Cart Deleted Sucessfully",
+                    });
+                }
+                else
+                {
+                    return this.BadRequest(new
+                    {
+                        Success = false,
+                        message = "Enter Valid CartId"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
