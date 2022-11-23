@@ -37,5 +37,27 @@ namespace BusinessLayer.Services
                 throw e;
             }
         }
+        public bool DeleteAddress(int addressId)
+        {
+            try
+            {
+                return addressRL.DeleteAddress(addressId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public List<AddressModel> GetAllAddresses(int userId)
+        {
+            try
+            {
+                return addressRL.GetAllAddresses(userId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
