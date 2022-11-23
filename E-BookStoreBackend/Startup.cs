@@ -35,7 +35,7 @@ namespace E_BookStoreBackend
         {
             services.AddControllers();
             services.AddTransient<IUserBL, UserBL>();
-            services.AddTransient<IUserRL,UserRL>();
+            services.AddTransient<IUserRL, UserRL>();
             services.AddTransient<IAdminBL, AdminBL>();
             services.AddTransient<IAdminRL, AdminRL>();
             services.AddTransient<IBookBL, BookBL>();
@@ -44,8 +44,10 @@ namespace E_BookStoreBackend
             services.AddTransient<IWishlistRL, WishlistRL>();
             services.AddTransient<ICartBL, CartBL>();
             services.AddTransient<ICartRL, CartRL>();
+            services.AddTransient<IAddressBL, AddressBL>();
+            services.AddTransient<IAddressRL, AddressRL>();
             services.AddSwaggerGen();
-         
+
             services.AddSwaggerGen(c =>
             {
                 var jwtSecurityScheme = new OpenApiSecurityScheme
