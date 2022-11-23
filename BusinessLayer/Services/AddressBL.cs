@@ -19,7 +19,20 @@ namespace BusinessLayer.Services
             try
             {
                 return addressRL.AddAddress(userId, addressModel);
-            }catch(Exception e)
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public bool UpdateAddress(int addressId, AddressModel addressModel)
+        {
+            try
+            {
+                return addressRL.UpdateAddress(addressId, addressModel);
+
+            }
+            catch (Exception e)
             {
                 throw e;
             }

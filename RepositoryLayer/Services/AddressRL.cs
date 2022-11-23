@@ -44,5 +44,33 @@ namespace RepositoryLayer.Services
                 this.sqlConnection.Close();
             }
         }
+        public bool UpdateAddress(int addressId, AddressModel addressModel)
+        {
+            try
+            {
+                this.sqlConnection = new SqlConnection(this.configuration["ConnectionStrings:EBookStore"]);
+                SqlCommand cmd = new SqlCommand("SP_UpdateAddress", this.sqlConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                cmd.Parameters.AddWithValue("@AddressId", addressId);
+                cmd.Parameters.AddWithValue("@Address", addressModel.Address);
+                cmd.Parameters.AddWithValue("@City", addressModel.City);
+                cmd.Parameters.AddWithValue("@State", addressModel.State);
+                cmd.Parameters.AddWithValue("@TypeId", addressModel.TypeId);
+                this.sqlConnection.Open();
+                cmd.ExecuteScalar();
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                this.sqlConnection.Close();
+            }
+        }
     }
 }

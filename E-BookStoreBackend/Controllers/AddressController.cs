@@ -36,5 +36,25 @@ namespace E_BookStoreBackend.Controllers
                 throw ex;
             }
         }
+        [HttpPut("UpdateAddress")]
+        public IActionResult UpdateAddress(int AddressId, AddressModel addressModel)
+        {
+            try
+            {
+                var result = this.addressBL.UpdateAddress(AddressId, addressModel);
+                if (result.Equals(true))
+                {
+                    return this.Ok(new { success = true, message = $"Address updated Successfully " });
+                }
+                else
+                {
+                    return this.BadRequest(new { Status = false, Message = result });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
