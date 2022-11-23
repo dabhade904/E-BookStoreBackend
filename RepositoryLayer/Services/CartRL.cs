@@ -69,6 +69,30 @@ namespace RepositoryLayer.Services
                 sqlConnection.Close();
             }
         }
+        public bool UpdateCart(int cartId, int booksQty)
+        {
+            try
+            {
+                this.sqlConnection = new SqlConnection(this.configuration["ConnectionStrings:EBookStore"]);
+                SqlCommand cmd = new SqlCommand("SP_UpdateCart", this.sqlConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
 
+                cmd.Parameters.AddWithValue("@CartId", cartId);
+                cmd.Parameters.AddWithValue("@BooksQty", booksQty);
+                sqlConnection.Open();
+                cmd.ExecuteScalar();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
     }
 }

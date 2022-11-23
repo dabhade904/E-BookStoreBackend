@@ -76,5 +76,35 @@ namespace E_BookStoreBackend.Controllers
                 throw ex;
             }
         }
+        [Authorize(Roles = Role.User)]
+        [HttpPut("UpdateCart")]
+        public IActionResult UpdateCart(int cartId, int booksQty)
+        {
+            try
+            {
+                var Data = this.cartBL.UpdateCart(cartId, booksQty);
+                if (Data == true)
+                {
+                    return this.Ok(new
+                    {
+                        Success = true,
+                        message = " Book Updated successfully",
+                        Response = Data
+                    });
+                }
+                else
+                {
+                    return this.BadRequest(new
+                    {
+                        Success = false,
+                        message = "Enter Valid BookId"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
     }
 }

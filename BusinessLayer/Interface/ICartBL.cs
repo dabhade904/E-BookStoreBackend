@@ -9,6 +9,8 @@ namespace BusinessLayer.Interface
     {
       public string AddBookToCart(CartModel cartModel, int userId);
         public string DeleteCart(int cartId);
+        public bool UpdateCart(int cartId, int booksQty);
+
 
     }
 }
