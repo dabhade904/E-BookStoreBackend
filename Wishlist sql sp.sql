@@ -20,3 +20,41 @@ insert into WishListTable values
 )
 end
 GO
+
+create procedure [dbo].[SP_GetAllWishListBooks]
+(
+@BookId int
+)
+as
+begin
+select * from BookTable where Id=@BookId
+end
+GO
+
+
+create procedure [dbo].[SP_DeleteWishlist]
+(
+@WishListId int
+)
+as
+begin
+Delete from WishListTable where WishListId=@WishListId;
+end
+GO
+
+
+
+select * from AdminData
+select * from WishListTable
+select * from users
+select * from BookTable
+
+create procedure spGetAllWishList(	
+@UserId int
+)
+as
+BEGIN
+select w.WishListId,w.BookId,w.UserId,b.BookName,b.BookImage,b.Author,b.DiscountPrice,b.ActualPrice	from WishList w	inner join Books b	
+on 
+w.BookId = b.BookId	where w.UserId = @UserId;
+END
