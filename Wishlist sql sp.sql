@@ -7,6 +7,7 @@ UserId int not null,
 foreign key(UserId) REFERENCES Users(Id)
 );
 select * from WishListTable
+
 create procedure [dbo].[SP_CreateWishList]
 (
 @BookId int,
