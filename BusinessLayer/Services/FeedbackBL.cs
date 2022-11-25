@@ -25,6 +25,16 @@ namespace BusinessLayer.Services
                 throw e;
             }
         }
+        public List<GetFeedbackDataModel> GetAllFeedbacks(int bookId)
+        {
+            try
+            {
+                return feedbackRL.GetAllFeedbacks(bookId);
+            }catch(Exception e)
+            {
+                throw e;
+            }
+        }
 
     }
 }

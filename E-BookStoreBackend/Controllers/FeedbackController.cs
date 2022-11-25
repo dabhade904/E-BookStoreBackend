@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System;
+using BusinessLayer.Services;
 
 namespace E_BookStoreBackend.Controllers
 {
@@ -39,6 +40,26 @@ namespace E_BookStoreBackend.Controllers
             catch (Exception ex)
             {
                 return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
+        [HttpGet("GetAll")]
+        public IActionResult GetAllFeedbacks(int bookId)
+        {
+            try
+            {
+                var res = feedbackBL.GetAllFeedbacks(bookId);
+                if (res != null)
+                {
+                    return Ok(new { success = true, message = "Feedback fetched sucessfully", data = res });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Faild to fetched Feedbacks" });
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return NotFound(new { success = false, message = ex.Message });
             }
         }
     }
