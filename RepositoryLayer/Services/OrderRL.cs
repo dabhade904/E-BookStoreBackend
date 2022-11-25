@@ -108,5 +108,39 @@ namespace RepositoryLayer.Services
                 sqlConnection.Close();
             }
         }
+        public string DeleteOrder(int ordersId, int userId)
+        {
+            sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
+            using (sqlConnection)
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("SP_RemoveFromOrder", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@OrdersId", ordersId);
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+
+
+                    sqlConnection.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                    if (result != 0)
+                    {
+                        return "Order Deleted Successfully";
+                    }
+                    else
+                    {
+                        return "Failed to Delete the Order";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+        }
     }
 }

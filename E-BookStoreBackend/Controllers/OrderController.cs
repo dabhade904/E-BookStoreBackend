@@ -63,5 +63,29 @@ namespace E_BookStoreBackend.Controllers
                 return this.NotFound(new { Status = false, Message = e.Message });
             }
         }
+     
+        [HttpDelete("Delete")]
+        public IActionResult DeleteOrder(int orderId)
+        {
+            try
+            {
+                int userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                var result = orderBL.DeleteOrder(orderId, userId);
+                if (result != null)
+                {
+                    return this.Ok(new { success = true, data = result });
+
+                }
+                else
+                {
+                    return this.BadRequest();
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

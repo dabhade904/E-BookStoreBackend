@@ -36,6 +36,15 @@ namespace BusinessLayer.Services
                 throw e;
             }
         }
-
+        public string DeleteOrder(int ordersId, int userId)
+        {
+            try
+            {
+                return orderRL.DeleteOrder(ordersId, userId);
+            } catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

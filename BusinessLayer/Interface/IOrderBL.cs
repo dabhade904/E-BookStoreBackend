@@ -9,6 +9,7 @@ namespace BusinessLayer.Interface
     {
         public string AddOrder(OrderModel order);
         public List<GetOrderDetailsModel> AllOrderDetails(int userId);
+        public string DeleteOrder(int ordersId, int userId);
 
     }
 
