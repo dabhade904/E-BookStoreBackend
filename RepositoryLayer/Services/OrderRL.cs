@@ -58,5 +58,55 @@ namespace RepositoryLayer.Services
                 sqlConnection.Close();
             }
         }
+        public List<GetOrderDetailsModel> AllOrderDetails(int userId)
+        {
+            sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
+            try
+            {
+                using (sqlConnection)
+                {
+                    string storeprocedure = "SP_GetAllOrders";
+                    SqlCommand sqlCommand = new SqlCommand(storeprocedure, sqlConnection);
+                    sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    sqlCommand.Parameters.AddWithValue("@UserId", userId);
+                    sqlConnection.Open();
+                    SqlDataReader sqlData = sqlCommand.ExecuteReader();
+                    List<GetOrderDetailsModel> order = new List<GetOrderDetailsModel>();
+                    if (sqlData.HasRows)
+                    {
+                        while (sqlData.Read())
+                        {
+                            GetOrderDetailsModel orderModel = new GetOrderDetailsModel();
+                            BookModel getbookModel = new BookModel();
+                            getbookModel.ID = Convert.ToInt32(sqlData["ID"]);
+                            getbookModel.BookName = sqlData["BookName"].ToString();
+                            getbookModel.Author = sqlData["Author"].ToString();
+                            getbookModel.DiscountPrice = Convert.ToInt32(sqlData["DiscountPrice"]);
+                            getbookModel.ActualPrice = Convert.ToInt32(sqlData["ActualPrice"]);
+                            getbookModel.BookDetail = sqlData["BookDetail"].ToString();
+                            getbookModel.BookImage = sqlData["BookImage"].ToString();
+                            orderModel.OrderId = Convert.ToInt32(sqlData["OrdersId"]);
+                            orderModel.OrderDate = sqlData["OrderDate"].ToString();
+                            orderModel.model = getbookModel;
+                            order.Add(orderModel);
+                        }
+                        return order;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
     }
 }

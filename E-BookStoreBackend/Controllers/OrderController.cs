@@ -43,6 +43,25 @@ namespace E_BookStoreBackend.Controllers
             }
         }
 
-
+        [HttpGet("GetOrdersDetails")]
+        public IActionResult AlOrderDetails(int UserId)
+        {
+            try
+            {
+                var result = this.orderBL.AllOrderDetails(UserId);
+                if (result != null)
+                {
+                    return this.Ok(new { Status = true, Message = "Order Book data Fetched", Data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { Status = false, Message = "There is no order for the User" });
+                }
+            }
+            catch (Exception e)
+            {
+                return this.NotFound(new { Status = false, Message = e.Message });
+            }
+        }
     }
 }
