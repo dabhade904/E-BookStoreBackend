@@ -81,7 +81,6 @@ namespace E_BookStoreBackend.Controllers
         }
         [Authorize(Roles = Role.User)]
         [HttpGet("GetAllAddress")]
-        //[Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult GetAllAddress()
         {
             try

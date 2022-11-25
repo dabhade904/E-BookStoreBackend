@@ -6,9 +6,13 @@ namespace CommonLayer.Model
 {
     public class WishlistModel
     {
-        public int wishListId { get; set; }
-        public int userId { get; set; }
-        public int bookId { get; set; }
-        public BookModel bookModel { get; set; }
+        public int WishListId { get; set; }
+        public int BookId { get; set; }
+        public int UserId { get; set; }
+        public string BookName { get; set; }
+        public string BookImage { get; set; }
+        public string Author { get; set; }
+        public double DiscountPrice { get; set; }
+        public double ActualPrice { get; set; }
     }
 }

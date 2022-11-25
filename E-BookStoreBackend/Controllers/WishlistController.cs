@@ -10,6 +10,7 @@ using System.Linq;
 
 namespace E_BookStoreBackend.Controllers
 {
+    [Authorize(Roles = Role.User)]
     [Route("api/[controller]")]
     [ApiController]
     public class WishlistController : ControllerBase
@@ -19,71 +20,16 @@ namespace E_BookStoreBackend.Controllers
         {
             this.wishlistBL = wishlistBL;
         }
-
-        [Authorize(Roles = Role.User)]
-        [HttpPost("CreateWishList")]
-        public IActionResult CreateWishList(WishlistModel wishlistModel,int userId)
-        {
-            try
-            {
-                var result = wishlistBL.AddBookinWishList(wishlistModel,userId);
-                if (!result.Equals(null))
-                {
-                    return this.Ok(new
-                    {
-                        success = true,
-                        message = "Wishlist is created",
-                        data = result
-                    });
-                }
-                else
-                {
-                    return this.BadRequest(new
-                    {
-                        success = false,
-                        message = "Something went wrong"
-                    });
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-        [Authorize(Roles = Role.User)]
-        [HttpGet("GetAllBooksinWishList")]
-       // [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult GetAllBooksinWishList()
+        [HttpPost("Add")]
+        public IActionResult AddToWishlist(int BookId)
         {
             try
             {
                 int userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
-                var result = this.wishlistBL.GetAllBooksinWishList(userId);
+                var result = wishlistBL.AddToWishList(BookId, userId);
                 if (result != null)
                 {
-                    return this.Ok(new { success = true, message = $"All Books Displayed in the WishList Successfully ", response = result });
-                }
-                else
-                {
-                    return this.BadRequest(new { Status = false, Message = $"Books are not there in WishList " });
-                }
-            }
-            catch (Exception eX)
-            {
-                throw eX;
-            }
-        }
-
-        [Authorize(Roles = Role.User)]
-        [HttpDelete("DeleteWishListBook")]
-        public IActionResult DeleteWishlist(int wishlistId)
-        {
-            try
-            {
-                var result = wishlistBL.DeleteFromWishList(wishlistId);
-                if (result != null)
-                {
-                    return this.Ok(new { success = true, data = result,message="Book deleted for wishlist" });
+                    return this.Ok(new { success = true, message = "Book Added to wishlist", data = result });
 
                 }
                 else
@@ -97,7 +43,51 @@ namespace E_BookStoreBackend.Controllers
                 throw;
             }
         }
+        [HttpGet("GetAllWishlist")]
+        public IActionResult GetWishlistitem()
+        {
+            try
+            {
+                int userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                var result = wishlistBL.GetAllWishList(userId);
+                if (result != null)
+                {
+                    return this.Ok(new { data = result });
 
+                }
+                else
+                {
+                    return this.BadRequest();
+                }
+            }
+            catch (System.Exception)
+            {
 
+                throw;
+            }
+        }
+        [HttpDelete("Delete")]
+        public IActionResult DeleteWishlist(int wishlistId)
+        {
+            try
+            {
+                int userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                var result = wishlistBL.RemoveFromWishList(wishlistId);
+                if (result != null)
+                {
+                    return this.Ok(new { success = true, data = result });
+
+                }
+                else
+                {
+                    return this.BadRequest();
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

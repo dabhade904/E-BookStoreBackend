@@ -7,9 +7,10 @@ namespace BusinessLayer.Interface
 {
     public interface IWishlistBL
     {
-        public string AddBookinWishList(WishlistModel wishListModel, int userId);
-        public List<WishlistModel> GetAllBooksinWishList(int userId);
-        public string DeleteFromWishList(int wishListId);
+        public string AddToWishList(int bookId, int userId);
+        public List<WishlistModel> GetAllWishList(int userId);
+        public string RemoveFromWishList(int wishListId);
+
 
     }
 }

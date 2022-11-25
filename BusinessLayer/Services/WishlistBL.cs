@@ -7,45 +7,44 @@ using System.Text;
 
 namespace BusinessLayer.Services
 {
-    public class WishlistBL:IWishlistBL
+    public class WishlistBL : IWishlistBL
     {
         public readonly IWishlistRL wishlistRL;
         public WishlistBL(IWishlistRL wishlistRL)
         {
             this.wishlistRL = wishlistRL;
         }
-
-        public string AddBookinWishList(WishlistModel wishListModel, int userId)
+        public string AddToWishList(int bookId, int userId)
         {
             try
             {
-                return wishlistRL.AddBookinWishList(wishListModel, userId); 
+                return this.wishlistRL.AddToWishList(bookId, userId);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
-        public List<WishlistModel> GetAllBooksinWishList(int userId)
+        public List<WishlistModel> GetAllWishList(int userId)
         {
             try
             {
-                return wishlistRL.GetAllBooksinWishList(userId);
+                return this.wishlistRL.GetAllWishList(userId);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
-        public string DeleteFromWishList(int wishListId)
+        public string RemoveFromWishList(int wishListId)
         {
             try
             {
-                return wishlistRL.DeleteFromWishList(wishListId);
+                return this.wishlistRL.RemoveFromWishList(wishListId);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
     }

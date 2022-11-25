@@ -12,97 +12,103 @@ namespace RepositoryLayer.Services
 {
     public class WishlistRL : IWishlistRL
     {
-        private SqlConnection sqlConnection;
-        private IConfiguration Configuration { get; }
-
-        public WishlistRL(IConfiguration Configuration)
+        private readonly IConfiguration configuration;
+        SqlConnection sqlConnection;
+        public WishlistRL(IConfiguration configuration)
         {
-            this.Configuration = Configuration;
+            this.configuration = configuration;
         }
-        public string AddBookinWishList(WishlistModel wishListModel, int userId)
+        public string AddToWishList(int bookId, int userId)
         {
-            try
-            {
-                this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
-                SqlCommand cmd = new SqlCommand("SP_CreateWishList", this.sqlConnection)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.AddWithValue("@BookId", wishListModel.bookId);
-                cmd.Parameters.AddWithValue("@UserId", userId);
-                sqlConnection.Open();
-                cmd.ExecuteNonQuery();
-                return "book is added in WishList successfully";
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                this.sqlConnection.Close();
-            }
-        }
-
-        public List<WishlistModel> GetAllBooksinWishList(int userId)
-        {
-            try
-            {
-                this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
-                SqlCommand cmd = new SqlCommand("SP_GetAllWishListBooks", this.sqlConnection)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-
-                List<WishlistModel> wishList = new List<WishlistModel>();
-                cmd.Parameters.AddWithValue("@UserId", userId);
-                sqlConnection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        WishlistModel model = new WishlistModel();
-                        BookModel bookModel = new BookModel();
-                        model.userId = Convert.ToInt32(reader["UserId"]);
-                        model.wishListId = Convert.ToInt32(reader["wishListId"]);
-                        bookModel.BookName = reader["BookName"].ToString();
-                        bookModel.Author = reader["Author"].ToString();
-                        bookModel.Rating = Convert.ToInt32(reader["Rating"]);
-                        bookModel.RatingCount = Convert.ToInt32(reader["RatingCount"]);
-                        bookModel.ActualPrice = Convert.ToInt32(reader["ActualPrice"]);
-                        bookModel.DiscountPrice = Convert.ToInt32(reader["DiscountPrice"]);
-                        bookModel.BookDetail = reader["BookDetail"].ToString();
-                        bookModel.Quantity = Convert.ToInt32(reader["Quantity"]);
-                        bookModel.BookImage = reader["BookImage"].ToString();
-                        model.bookId = Convert.ToInt32(reader["BookId"]);
-                        model.bookModel = bookModel;
-                        wishList.Add(model);
-                    }
-                    return wishList;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-        }
-        public string DeleteFromWishList(int wishListId)
-        {
-            this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
+            this.sqlConnection = new SqlConnection(this.configuration["ConnectionStrings:EBookStore"]);
             using (sqlConnection)
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("SP_DeleteWishlist", sqlConnection);
+                    SqlCommand cmd = new SqlCommand("SP_AddToWishList", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@BookId", bookId);
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+
+                    sqlConnection.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    sqlConnection.Close();
+
+                    if (result > 0)
+                    {
+                        return "Added to WishList Successfully";
+                    }
+                    else
+                    {
+                        return "Failed to Add to WishList";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+
+        }
+        public List<WishlistModel> GetAllWishList(int userId)
+        {
+            this.sqlConnection = new SqlConnection(this.configuration["ConnectionStrings:EBookStore"]);
+            using (sqlConnection)
+            {
+                try
+                {
+                    List<WishlistModel> wishListResponse = new List<WishlistModel>();
+                    SqlCommand cmd = new SqlCommand("SP_GetAllWishList", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+
+                    sqlConnection.Open();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+
+                    if (rdr.HasRows)
+                    {
+                        while (rdr.Read())
+                        {
+                            WishlistModel wishList = new WishlistModel
+                            {
+                                BookId = Convert.ToInt32(rdr["BookId"]),
+                                UserId = Convert.ToInt32(rdr["UserId"]),
+                                WishListId = Convert.ToInt32(rdr["WishListId"]),
+                                BookName = Convert.ToString(rdr["BookName"]),
+                                Author = Convert.ToString(rdr["Author"]),
+                                BookImage = Convert.ToString(rdr["BookImage"]),
+                                DiscountPrice = Convert.ToDouble(rdr["DiscountPrice"]),
+                                ActualPrice = Convert.ToDouble(rdr["ActualPrice"])
+                            };
+                            wishListResponse.Add(wishList);
+                        }
+                        sqlConnection.Close();
+                        return wishListResponse;
+                    }
+                    else
+                    {
+                        sqlConnection.Close();
+                        return null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+        }
+        public string RemoveFromWishList(int wishListId)
+        {
+            this.sqlConnection = new SqlConnection(this.configuration["ConnectionStrings:EBookStore"]);
+            using (sqlConnection)
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("SP_RemoveFromWishList", sqlConnection);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@WishListId", wishListId);
@@ -127,5 +133,6 @@ namespace RepositoryLayer.Services
 
             }
         }
+
     }
 }
