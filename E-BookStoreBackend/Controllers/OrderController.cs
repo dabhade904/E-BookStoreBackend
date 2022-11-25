@@ -43,6 +43,49 @@ namespace E_BookStoreBackend.Controllers
             }
         }
 
+        [HttpGet("GetOrdersDetails")]
+        public IActionResult AlOrderDetails(int UserId)
+        {
+            try
+            {
+                var result = this.orderBL.AllOrderDetails(UserId);
+                if (result != null)
+                {
+                    return this.Ok(new { Status = true, Message = "Order Book data Fetched", Data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { Status = false, Message = "There is no order for the User" });
+                }
+            }
+            catch (Exception e)
+            {
+                return this.NotFound(new { Status = false, Message = e.Message });
+            }
+        }
+     
+        [HttpDelete("Delete")]
+        public IActionResult DeleteOrder(int orderId)
+        {
+            try
+            {
+                int userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                var result = orderBL.DeleteOrder(orderId, userId);
+                if (result != null)
+                {
+                    return this.Ok(new { success = true, data = result });
 
+                }
+                else
+                {
+                    return this.BadRequest();
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
