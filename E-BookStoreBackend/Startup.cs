@@ -92,7 +92,15 @@ namespace E_BookStoreBackend
                     ValidateAudience = false
                 };
             });
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                name: "AllowOrigin",
+              builder => {
+                  builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+              });
+            });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,6 +110,8 @@ namespace E_BookStoreBackend
             {
                 app.UseDeveloperExceptionPage();
             }
+          
+            app.UseCors("AllowOrigin");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

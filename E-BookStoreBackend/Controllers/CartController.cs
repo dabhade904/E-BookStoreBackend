@@ -17,16 +17,16 @@ namespace E_BookStoreBackend.Controllers
         {
             this.cartBL = cartBL;
         }
-
+      
         [Authorize(Roles = Role.User)]
         [HttpPost("AddToCart")]
         //  [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult AddToCart(CartModel cartModel)
+        public IActionResult AddToCart(CartModel cartModel,int  bookId)
         {
             try
             {
                 int userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
-                var userData = this.cartBL.AddBookToCart(cartModel, userId);
+                var userData = this.cartBL.AddBookToCart(cartModel, userId, bookId);
                 if (userData != null)
                 {
                     return this.Ok(new
@@ -126,5 +126,6 @@ namespace E_BookStoreBackend.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
+
     }
 }

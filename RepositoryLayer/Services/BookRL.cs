@@ -24,7 +24,7 @@ namespace RepositoryLayer.Services
             try
             {
                 this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
-                SqlCommand cmd = new SqlCommand("dbo.SP_CreateBook", this.sqlConnection)
+                SqlCommand cmd = new SqlCommand("CreateBook_SP", this.sqlConnection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -93,11 +93,11 @@ namespace RepositoryLayer.Services
                 this.sqlConnection.Close();
             }
         }
-        public List<BookModel> GetAllBooks()
+        public List<GetBookModel> GetAllBooks()
         {
             try
             {
-                List<BookModel> book = new List<BookModel>();
+                List<GetBookModel> book = new List<GetBookModel>();
                 this.sqlConnection = new SqlConnection(this.Configuration["ConnectionStrings:EBookStore"]);
                 SqlCommand cmd = new SqlCommand("SP_GetAllBook", this.sqlConnection)
                 {
@@ -109,7 +109,7 @@ namespace RepositoryLayer.Services
                 {
                     while (reader.Read())
                     {
-                        book.Add(new BookModel
+                        book.Add(new GetBookModel
                         {
                             ID = Convert.ToInt32(reader["Id"]),
                             BookName = reader["BookName"].ToString(),

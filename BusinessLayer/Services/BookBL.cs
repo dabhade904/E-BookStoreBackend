@@ -36,7 +36,7 @@ namespace BusinessLayer.Services
                 throw;
             }
         }
-        public List<BookModel> GetAllBooks()
+        public List<GetBookModel> GetAllBooks()
         {
             try
             {

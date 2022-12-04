@@ -79,7 +79,7 @@ namespace RepositoryLayer.Services
                         {
                             GetOrderDetailsModel orderModel = new GetOrderDetailsModel();
                             BookModel getbookModel = new BookModel();
-                            getbookModel.ID = Convert.ToInt32(sqlData["ID"]);
+                        //    getbookModel.ID = Convert.ToInt32(sqlData["ID"]);
                             getbookModel.BookName = sqlData["BookName"].ToString();
                             getbookModel.Author = sqlData["Author"].ToString();
                             getbookModel.DiscountPrice = Convert.ToInt32(sqlData["DiscountPrice"]);
