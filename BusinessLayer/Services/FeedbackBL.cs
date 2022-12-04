@@ -15,11 +15,11 @@ namespace BusinessLayer.Services
             this.feedbackRL = feedbackRL;
         }
 
-        public FeedbackModel AddFeedback(FeedbackModel model, int userId)
+        public FeedbackModel AddFeedback(FeedbackModel model,int bookId, int userId)
         {
             try
             {
-                return feedbackRL.AddFeedback(model, userId);   
+                return feedbackRL.AddFeedback(model, bookId, userId);   
             }catch(Exception e)
             {
                 throw e;

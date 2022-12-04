@@ -9,17 +9,21 @@ create table BookTable (
 	Quantity int,
 	Rating float,
 	RatingCount float,
+
 	);
 go
-CREATE PROCEDURE [dbo].[SP_CreateBook] @BookName VARCHAR(100), @Author VARCHAR(100), @BookImage VARCHAR(100), @BookDetail varchar(100),@DiscountPrice int,
+create PROCEDURE [dbo].[CreateBook_SP] @BookName VARCHAR(100), @Author VARCHAR(100), @BookImage VARCHAR(100), @BookDetail varchar(100),@DiscountPrice int,
 	@ActualPrice int,
 	@Quantity int,
 	@Rating float,
 	@RatingCount float 
+
 AS
 BEGIN
-INSERT INTO BookTable( BookName,Author,BookImage,BookDetail,DiscountPrice,ActualPrice,Quantity,Rating,RatingCount) VALUES (@BookName, @Author, @BookImage, @BookDetail,@DiscountPrice,@ActualPrice,@Quantity,@Rating,@RatingCount)
+INSERT INTO BookTable(BookName,Author,BookImage,BookDetail,DiscountPrice,ActualPrice,Quantity,Rating,RatingCount) VALUES (@BookName, @Author, @BookImage, @BookDetail,@DiscountPrice,@ActualPrice,@Quantity,@Rating,@RatingCount)
 END
+
+
 select * from Users
 select * from BookTable
 drop table BookTable
@@ -72,3 +76,18 @@ DiscountPrice=@DiscountPrice,BookDetail=@BookDetail,Quantity=@Quantity,BookImage
 where Id=@BooKId;
 end
 GO
+
+
+ "id": 13,
+  "bookName": "The lord of the rings",
+  "author": "lord",
+  "bookImage": "https://res.cloudinary.com/ddterl1p6/image/upload/v1669836268/E-bookStore/The_lord_of_the_rings_xsrxxz.jpg",
+  "bookDetail": "ringd",
+  "discountPrice": 1000,
+  "actualPrice": 1500,
+  "quantity": 10,
+  "rating": 5,
+  "ratingCount": 3
+
+
+SET IDENTITY_INSERT BookTable ON

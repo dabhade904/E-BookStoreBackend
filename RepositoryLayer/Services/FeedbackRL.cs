@@ -20,7 +20,7 @@ namespace RepositoryLayer.Services
             this.configuration = configuration;
         }
 
-        public FeedbackModel AddFeedback(FeedbackModel model, int userId)
+        public FeedbackModel AddFeedback(FeedbackModel model,int bookId, int userId)
         {
            sqlConnection = new SqlConnection(this.configuration["ConnectionStrings:EBookStore"]);
             try
@@ -31,7 +31,7 @@ namespace RepositoryLayer.Services
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Comment", model.Comment);
                     cmd.Parameters.AddWithValue("@Rating", model.Rating);
-                    cmd.Parameters.AddWithValue("@BookId",model.BookId);
+                    cmd.Parameters.AddWithValue("@BookId",bookId);
                     cmd.Parameters.AddWithValue("@UserId", userId);
                     sqlConnection.Open();
                     cmd.ExecuteNonQuery();

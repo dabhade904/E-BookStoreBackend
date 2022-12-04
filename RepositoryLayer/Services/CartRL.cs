@@ -5,6 +5,7 @@ using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Text;
 
 namespace RepositoryLayer.Services
@@ -18,7 +19,7 @@ namespace RepositoryLayer.Services
             this.configuration = configuration;
         }
 
-        public string AddBookToCart(CartModel cartModel, int userId)
+        public string AddBookToCart(CartModel cartModel, int userId, int bookId)
         {
             try
             {
@@ -29,7 +30,7 @@ namespace RepositoryLayer.Services
                 };
                 //adding parameter to store procedure
                 cmd.Parameters.AddWithValue("@BooksQty", cartModel.BooksQty);
-                cmd.Parameters.AddWithValue("@BookId", cartModel.BookId);
+                cmd.Parameters.AddWithValue("@BookId", bookId);
                 cmd.Parameters.AddWithValue("@UserId", userId);
 
                 this.sqlConnection.Open();
@@ -94,57 +95,55 @@ namespace RepositoryLayer.Services
                 sqlConnection.Close();
             }
         }
-        public List<CartModel> GetAllBooksinCart(int userId)
+        public List<CartResponce> GetAllBooksinCart(int userId)
         {
-            try
+            this.sqlConnection = new SqlConnection(this.configuration["ConnectionStrings:EBookStore"]);
+            using (sqlConnection)
             {
-                this.sqlConnection = new SqlConnection(this.configuration["ConnectionStrings:EBookStore"]);
-                SqlCommand cmd = new SqlCommand("SP_GetCartBooks", this.sqlConnection)
+                try
                 {
-                    CommandType = CommandType.StoredProcedure
-                };
+                    List<CartResponce> cartResponses = new List<CartResponce>();
+                    SqlCommand cmd = new SqlCommand("spGetAllCart", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                List<CartModel> cart = new List<CartModel>();
-                cmd.Parameters.AddWithValue("@UserId", userId);
-                sqlConnection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+
+                    sqlConnection.Open();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+
+                    if (rdr.HasRows)
                     {
-                        CartModel model = new CartModel();
-                        BookModel bookModel = new BookModel();
-                        model.CartId = Convert.ToInt32(reader["CartId"]);
-                        bookModel.BookName = reader["BookName"].ToString();
-                        bookModel.Author = reader["Author"].ToString();
-                        bookModel.Rating = Convert.ToInt32(reader["Rating"]);
-                        bookModel.RatingCount = Convert.ToInt32(reader["RatingCount"]);
-                        bookModel.ActualPrice = Convert.ToInt32(reader["ActualPrice"]);
-                        bookModel.DiscountPrice = Convert.ToInt32(reader["DiscountPrice"]);
-                        bookModel.BookDetail = reader["BookDetail"].ToString();
-                        bookModel.Quantity = Convert.ToInt32(reader["Quantity"]);
-                        bookModel.BookImage = reader["BookImage"].ToString();
-                        model.BookId = Convert.ToInt32(reader["BookId"]);
-                        model.BooksQty = Convert.ToInt32(reader["BooksQty"]);
-                        model.bookModel = bookModel;
-                        cart.Add(model);
-                    }
-                    return cart;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
+                        while (rdr.Read())
+                        {
+                            CartResponce cart = new CartResponce();
+                            cart.BookId = Convert.ToInt32(rdr["BookId"]);
+                            cart.UserId = Convert.ToInt32(rdr["UserId"]);
+                            cart.CartId = Convert.ToInt32(rdr["CartId"]);
+                            cart.BookName = Convert.ToString(rdr["BookName"]);
+                            cart.Author = Convert.ToString(rdr["Author"]);
+                            cart.BookImage = Convert.ToString(rdr["BookImage"]);
+                            cart.DiscountPrice = Convert.ToDouble(rdr["DiscountPrice"]);
+                            cart.ActualPrice = Convert.ToDouble(rdr["ActualPrice"]);
+                            cart.CartsQty = Convert.ToInt32(rdr["BooksQty"]);
+                            cart.Stock = Convert.ToInt32(rdr["Quantity"]);
+                            cartResponses.Add(cart);
+                        }
 
+                        sqlConnection.Close();
+                        return cartResponses;
+                    }
+                    else
+                    {
+                        sqlConnection.Close();
+                        return null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
         }
     }
 }

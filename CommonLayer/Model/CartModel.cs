@@ -6,9 +6,9 @@ namespace CommonLayer.Model
 {
     public class CartModel
     {
-        public int CartId { get; set; }
-        public int BookId { get; set; }
+       // public int CartId { get; set; }
+      //  public int BookId { get; set; }
         public int BooksQty { get; set; }
-        public BookModel bookModel { get; set; }
+    //    public GetBookModel bookModel { get; set; }
     }
 }

@@ -22,12 +22,12 @@ namespace E_BookStoreBackend.Controllers
 
         [Authorize(Roles = Role.User)]
         [HttpPost("AddFeedback")]
-        public IActionResult AddFeedback(FeedbackModel model)
+        public IActionResult AddFeedback(FeedbackModel model,int bookId)
         {
             try
             {
                 int userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
-                var feedback = this.feedbackBL.AddFeedback(model, userId);
+                var feedback = this.feedbackBL.AddFeedback(model, bookId, userId);
                 if (feedback != null)
                 {
                     return this.Ok(new { Status = true, Message = " Feedback added successfully ", Response = feedback });

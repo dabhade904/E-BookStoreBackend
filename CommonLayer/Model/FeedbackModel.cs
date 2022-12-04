@@ -8,6 +8,6 @@ namespace CommonLayer.Model
     {
         public string Comment { get; set; }
         public float Rating { get; set; }
-        public int BookId { get; set; }
+       // public int BookId { get; set; }
     }
 }

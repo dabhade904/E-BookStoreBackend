@@ -3,14 +3,74 @@ create table CartTable
 CartId int identity(1,1) primary key,
 BooksQty int not null,
 BooKId int not null,
-FOREIGN KEY (BookId) REFERENCES BookTable(Id),
+FOREIGN KEY (BookId) REFERENCES BookTable(ID),
 UserId int not null,
-foreign key(UserId) REFERENCES Users(Id)
+foreign key(UserId) REFERENCES Users(ID)
 );
 
+select * from CartTable
+create procedure spGetAllCart
+(
+	@UserId int
+)
+as
+BEGIN
+	select 
+		c.CartId,
+		c.BookId,
+		c.UserId,
+		c.BooksQty,
+		b.BookName,
+		b.BookImage,
+		b.Author,
+		b.DiscountPrice,
+		b.ActualPrice,
+		b.Quantity
+	from CartTable c
+	inner join BookTable b
+	on c.BookId = b.ID
+	where c.UserId = @UserId;
+END
+
+
+create procedure SP_AddToBag
+(
+    @CartsQty int,
+	@UserId int,
+	@BookId int
+)
+as
+BEGIN
+IF (NOT EXISTS(SELECT * FROM CartTable	 WHERE BooKId = @BookId and UserId=@UserId))
+		begin
+		insert into CartTable
+		values(@CartsQty, @UserId, @BookId);
+		end
+end
+go
+
+
+drop table CartTable
+Users
 select *from CartTable
 
+create procedure spAddToCart
+(
+    @CartsQty int,
+	@UserId int,
+	@BookId int
+)
+as
+BEGIN
+IF (NOT EXISTS(SELECT * FROM CartTable	 WHERE BooKId = @BookId and UserId=@UserId))
+		begin
+		insert into CartTable
+		values(@CartsQty, @UserId, @BookId);
+		end
+end
+go
 
+select * from BookTable
 create procedure [dbo].[SP_AddCart]
 (
 @BooksQty int,

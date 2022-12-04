@@ -34,7 +34,7 @@ namespace RepositoryLayer.Services
                     };
                     cmd.Parameters.AddWithValue("@FullName", registrationModel.FullName);
                     cmd.Parameters.AddWithValue("@EmailId", registrationModel.Email);
-                    cmd.Parameters.AddWithValue("@Password", EncryptPassword(registrationModel.Password));
+                    cmd.Parameters.AddWithValue("@Password", registrationModel.Password);
                     cmd.Parameters.AddWithValue("@MobileNumber", registrationModel.MobileNumber);
                     this.sqlConnection.Open();
                     var result = cmd.ExecuteNonQuery();
@@ -171,7 +171,7 @@ namespace RepositoryLayer.Services
                         command.CommandType = CommandType.StoredProcedure;
                         sqlConnection.Open();
                         command.Parameters.AddWithValue("@EmailId", EmailId);
-                        command.Parameters.AddWithValue("@Password", EncryptPassword(resetPassword));
+                        command.Parameters.AddWithValue("@Password",resetPassword);
                         int result = command.ExecuteNonQuery();
                         if (result > 0)
                         {

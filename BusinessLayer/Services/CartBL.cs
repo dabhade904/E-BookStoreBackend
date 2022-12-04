@@ -14,11 +14,11 @@ namespace BusinessLayer.Services
         {
             this.cartRL = cartRL;
         }
-        public string AddBookToCart(CartModel cartModel, int userId)
+        public string AddBookToCart(CartModel cartModel, int userId, int bookId)
         {
             try
             {
-                return cartRL.AddBookToCart(cartModel, userId);
+                return cartRL.AddBookToCart(cartModel, userId,bookId);
             }
             catch (Exception e)
             {
@@ -46,7 +46,7 @@ namespace BusinessLayer.Services
                 throw e;
             }
         }
-        public List<CartModel> GetAllBooksinCart(int userId)
+        public List<CartResponce> GetAllBooksinCart(int userId)
         {
             try
             {
